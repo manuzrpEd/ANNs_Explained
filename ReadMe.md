@@ -78,8 +78,9 @@ model no matter how deep the network is.
 | **Sigmoid** (logistic) | σ(x) = 1 / (1 + e⁻ˣ) | (0, 1) | Smooth, interpretable as a probability. Prone to **vanishing gradients** in deep nets. Used for binary-output layers. |
 | **Tanh** | tanh(x) = (e²ˣ − 1) / (e²ˣ + 1) | (−1, 1) | Zero-centered (helps optimization vs. sigmoid). Still saturates, less severely. Common inside RNN cells. |
 | **ReLU** | f(x) = max(0, x) | [0, +∞) | Simple, cheap, doesn't saturate for x > 0. Can "die" for x < 0. Default choice for hidden layers in MLPs/CNNs. |
-| **Softmax** | softmaxᵢ(x) = eˣⁱ / Σⱼ eˣʲ | (0, 1), sums to 1 | Turns a vector of scores into a probability distribution. Standard for multi-class output layers, and for attention weights in Transformers. |
-| **GELU / SiLU (Swish)** | smooth, ReLU-like approximations | ≈ (−0.2, +∞) | Smoother than ReLU; the default in most modern Transformers (BERT, GPT-style models). |
+| **Leaky ReLU** | f(x) = x if x>0 else αx (small α, e.g. 0.1–0.2) | (−∞, +∞) | Fixes "dying ReLU" by letting a small gradient through for x < 0. Common in GAN discriminators. |
+| **GELU / SiLU (Swish)** | smooth, ReLU-like approximations | ≈ (−0.2, +∞) | Smoother than ReLU (no kink at 0); the default in most modern Transformers (BERT, GPT-style models). |
+| **Softmax** | softmaxᵢ(x) = eˣⁱ / Σⱼ eˣʲ | (0, 1), sums to 1 | The odd one out: a *vector* function, not a pointwise one — every output depends on every input. Turns a vector of scores into a probability distribution. Standard for multi-class output layers, and for attention weights in Transformers. |
 
 ### 2.3 Training a network
 
